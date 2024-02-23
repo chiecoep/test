@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/sample.css">
+    <title>えあわせゲーム</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>えあわせゲーム</h1>
+    </header>
+
+    <main>
+        <div id="game-board">
+            <div class="card">🍎</div>
+            <div class="card">🍎</div>
+            <div class="card">🍌</div>
+            <div class="card">🍌</div>
+            <div class="card">🍇</div>
+            <div class="card">🍇</div>
+            <div class="card">🍓</div>
+            <div class="card">🍓</div>
+            <div class="card">🍒</div>
+            <div class="card">🍒</div>
+        </div>
+        <div id="score-board">スコア: 0</div>
+        <button id="reset-button" style="display: none;">もう一度挑戦</button>
+    </main>
+
+    <footer></footer>
+
+    <script>
+        var cardElements = Array.from(document.getElementsByClassName('card'));
+        var flippedCards = [];
+        var score = 0;
+    
+        function checkForMatch() {
+            if (flippedCards[0].dataset.value === flippedCards[1].dataset.value) {
+                flippedCards[0].style.visibility = 'hidden';
+                flippedCards[1].style.visibility = 'hidden';
+                flippedCards = [];
+                if (cardElements.every(card => card.style.visibility === 'hidden')) {
+                    showResultMessage();
+                }
+            } else {
+                setTimeout(function() {
+                    flippedCards[0].innerText = '';
+                    flippedCards[1].innerText = '';
+                    flippedCards = [];
+                }, 1000);
+            }
+            score++;
+            document.getElementById('score-board').innerText = 'スコア: ' + score;
+        }
+    
+        function showResultMessage() {
+            var message;
+            if (score <= 10) {
+                message = '素晴らしい！あなたは天才かもしれません！';
+            } else if (score <= 20) {
+                message = 'よくやった！あなたはかなり優れています！';
+            } else if (score <= 30) {
+                message = '悪くない！でももう少し練習が必要かもしれません。';
+            } else {
+                message = '頑張りましたね！でも、もう少し練習が必要です。';
+            }
+            setTimeout(function() {
+                alert(message);
+                document.getElementById('reset-button').style.display = 'block';
+            }, 500);
+        }
+    
+        function flipCard() {
+            if (flippedCards.length < 2 && this.innerText === '') {
+                this.innerText = this.dataset.value;
+                flippedCards.push(this);
+    
+                if (flippedCards.length === 2) {
+                    checkForMatch();
+                }
+            }
+        }
+    
+        function resetGame() {
+            cardElements.forEach(card => {
+                card.innerText = '';
+                card.style.visibility = 'visible';
+            });
+            document.getElementById('reset-button').style.display = 'none';
+            score = 0;
+            document.getElementById('score-board').innerText = 'スコア: ' + score;
+        }
+    
+        for (var i = 0; i < cardElements.length; i++) {
+            cardElements[i].addEventListener('click', flipCard);
+        }
+    
+        document.getElementById('reset-button').addEventListener('click', resetGame);
+    </script>
+    
+</body>
+
+</html>

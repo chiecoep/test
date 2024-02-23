@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <link rel="stylesheet" href="css/sample.css">
+    <title>じゃんけんゲーム</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>じゃんけんゲーム</h1>
+    </header>
+
+    <main>
+        <div><span id="pc_hands"><img src="img/janken.png"></span></div>
+        
+        <div id="judgment"><input type="text" value="" style="border: none;" /></div>
+
+        <div><span id="you_hands"><img src="img/janken.png"></span></div>
+        
+        <ul>
+            <li id="gu_btn"><img src="img/gu.png"></li>
+            <li id="cho_btn"><img src="img/cho.png"></li>
+            <li id="par_btn"><img src="img/par.png"></li>
+        </ul>
+     
+    </main>
+
+    <footer></footer>
+    <script>
+// グー
+   $("#gu_btn").on("click",function(){
+    const r = Math.ceil( Math.random()*3 );
+    let pc_hands = "";
+    if(r==1){
+        pc_hands = '<img class="p_hands" src="img/gu.png">';
+        judgment = 'あいこ';
+        you_hands ='<img class="y_hands" src="img/gu.png">';
+    }
+    if(r==2){
+        pc_hands = '<img class="p_hands" src="img/cho.png">';
+        judgment = '勝ち';
+        you_hands ='<img class="y_hands" src="img/gu.png">';
+    }
+    if(r==3){
+        pc_hands = '<img class="p_hands" src="img/par.png">';
+        judgment = '負け';
+        you_hands ='<img class="y_hands" src="img/gu.png">';
+    }
+    $("#pc_hands").html(pc_hands);
+    $("#judgment").html(judgment);
+    $("#you_hands").html(you_hands);
+   }) ;
+
+// チョキ
+   $("#cho_btn").on("click",function(){
+    const r = Math.ceil( Math.random()*3 );
+    let pc_hands = "";
+    if(r==1){
+        pc_hands =  '<img class="p_hands" src="img/gu.png">';
+        judgment = '負け';
+        you_hands ='<img class="y_hands" src="img/cho.png">';
+    }
+    if(r==2){
+        pc_hands = '<img class="p_hands" src="img/cho.png">';
+        judgment = 'あいこ';
+        you_hands ='<img class="y_hands" src="img/cho.png">';
+    }
+    if(r==3){
+        pc_hands = '<img class="p_hands" src="img/par.png">';
+        judgment = '勝ち';
+        you_hands ='<img class="y_hands" src="img/cho.png">';
+    }
+    $("#pc_hands").html(pc_hands);
+    $("#judgment").html(judgment);
+    $("#you_hands").html(you_hands);
+   }) ;
+
+// パー
+   $("#par_btn").on("click",function(){
+    const r = Math.ceil( Math.random()*3 );
+    let pc_hands = "";
+    if(r==1){
+        pc_hands =  '<img class="p_hands" src="img/gu.png">';
+        judgment = '勝ち';
+        you_hands ='<img class="y_hands" src="img/par.png">';
+    }
+    if(r==2){
+        pc_hands = '<img class="p_hands" src="img/cho.png">';
+        judgment = '負け';
+        you_hands ='<img class="y_hands" src="img/par.png">';
+    }
+    if(r==3){
+        pc_hands = '<img class="p_hands" src="img/par.png">';
+        judgment = 'あいこ';
+        you_hands ='<img class="y_hands" src="img/par.png">';
+    }
+    $("#pc_hands").html(pc_hands);
+    $("#judgment").html(judgment);
+    $("#you_hands").html(you_hands);
+   }) ;   
+    </script>
+</body>
+
+</html>
